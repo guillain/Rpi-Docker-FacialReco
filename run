@@ -1,0 +1,32 @@
+#!/bin/bash
+# https://hub.docker.com/r/mohaseeb/raspberrypi3-python-opencv/
+
+# APP=${1}
+
+if [ "${1}" == "" ]; then 
+  APP="${0}"
+  RUN="/bin/bash"
+else
+  APP=${1}
+  RUN="python /app.py"
+fi
+
+docker build -t opencv .
+
+docker run -it --rm opencv python -c "import cv2; print(cv2.__version__)"
+
+sudo xhost local:root
+docker run -it --rm \
+  -v `pwd`/${APP}:/app.py \
+  -v `pwd`/dataset:/dataset \
+  -v `pwd`/trainer:/trainer \
+  -v `pwd`/haarcascade_frontalface_default.xml:/haarcascade_frontalface_default.xml \
+  -v `pwd`:/ext \
+  --device=/dev/vcsm \
+  --device=/dev/vchiq \
+  --device /dev/video0 \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  --hostname `hostname` \
+  opencv ${RUN}
+
