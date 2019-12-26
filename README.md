@@ -5,7 +5,7 @@ All **congrats for M. Marcelo** who has done the dev, I've just put that in cont
 
 https://www.hackster.io/mjrobot/real-time-face-recognition-an-end-to-end-project-a10826
 
-X11 exernalized, means you have the graphical output from your docker ;)
+X11 externalized, means you have the graphical output from your docker ;)
 
 ## Pre-requisite
 - Raspberry min 3
@@ -14,7 +14,9 @@ X11 exernalized, means you have the graphical output from your docker ;)
 
 ## Easy Run
 1/ create your dataset with your face: `./run 01_face_dataset.py`
+
 2/ train and create model: `./run 02_face_training.py`
+
 3/ run the recognition: `./run 03_face_recognition.py`
 
 ## Toplay with OpenCV
